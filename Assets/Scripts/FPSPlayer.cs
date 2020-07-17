@@ -160,6 +160,6 @@ public class FPSPlayer : MonoBehaviour
         life -= damage;
         //UI_Manager.SetLife(life);//调用管理器实例的方法
         //如果没命了，释放鼠标
-        if (life <= 0) Screen.lockCursor = false;
+        if (life <= 0) Cursor.lockState = CursorLockMode.Locked;
     }
 }

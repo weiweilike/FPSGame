@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UI_Manager : MonoBehaviour
@@ -35,7 +36,7 @@ public class UI_Manager : MonoBehaviour
             GUI.skin.label.fontSize = 50;
             if (GUI.Button(new Rect(Screen.width * 0.5f - 150, Screen.height * 0.75f, 300, 40), "再来一次"))
             {
-                Application.LoadLevel(Application.loadedLevelName);
+                SceneManager.LoadScene("SampleScene");
             }
         }
     }
