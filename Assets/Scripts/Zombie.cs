@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Zombie : MonoBehaviour
 {
@@ -18,8 +19,9 @@ public class Zombie : MonoBehaviour
 
     [SerializeField]
     float m_rotspeed = 2;//旋转速度
-    [SerializeField]
-    public int m_life = 5;              // 生命值
+    Slider slider;//滑块表示僵尸的血条，血量为5
+    //[SerializeField]
+    //public int m_life = 5;              // 生命值
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +33,8 @@ public class Zombie : MonoBehaviour
         //m_agent.SetDestination(m_player.transform.position);//设置僵尸寻路的目标点
 
         anim = GetComponent<Animator>();//设置动画组件
+        slider = GameObject.Find("Zombie3/Zombie1/Canvas/Slider").GetComponent<Slider>();
+        slider.value = 10;
     }
 
     // Update is called once per frame
@@ -89,13 +93,12 @@ public class Zombie : MonoBehaviour
                 time = 1;
             }
                 
-            //if (anim_info.normalizedTime >= 1.0f)
-            //    m_player.OnDamage(1);
+            if (anim_info.normalizedTime >= 1.0f)
+                m_player.OnDamage(1);
 
             
             if (Vector3.Distance(m_transform.position, m_player.m_transform.position) > 5.0f)
             {
-                Debug.Log("attack to walk");
                 time = 1;//重置计时器
 
                 anim.SetBool("walk", true);
@@ -129,11 +132,13 @@ public class Zombie : MonoBehaviour
         //m_transform.rotation = Quaternion.LookRotation(newDir);
     }
     //僵尸受到伤害
-    public void OnDamage(int damage)
+    public void OnDamage(int demage)
     {
-        m_life -= damage;
-        //如果没命了，释放鼠标
-        if (m_life <= 0)
+        Debug.Log(slider.value);
+        slider.value -= demage;
+
+        //如果没命了,怪物死亡
+        if (slider.value <= 0)
         {
             anim.SetBool("fallForward", true);
         }
