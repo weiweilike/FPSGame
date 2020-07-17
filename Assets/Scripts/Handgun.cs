@@ -131,6 +131,7 @@ public class Handgun : MonoBehaviour {
             //给子弹加上速度
             bullet.GetComponent<Rigidbody>().velocity = 500 * bullet.transform.forward;
 
+
             RaycastHit info;    // 保存射线探测结果
             // 射线只能与m_layer指定的层发生碰撞
             bool hit = Physics.Raycast(
