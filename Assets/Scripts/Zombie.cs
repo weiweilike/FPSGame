@@ -94,9 +94,11 @@ public class Zombie : MonoBehaviour
             }
                 
             if (anim_info.normalizedTime >= 1.0f)
+            {
                 m_player.OnDamage(1);
-
-            
+                time = 2;
+            }
+                
             if (Vector3.Distance(m_transform.position, m_player.m_transform.position) > 5.0f)
             {
                 time = 1;//重置计时器
@@ -111,6 +113,7 @@ public class Zombie : MonoBehaviour
         //如果僵尸处于死亡状态且不在过渡状态
         if (anim_info.fullPathHash == Animator.StringToHash("Base Layer.Z_FallingForward") && !anim.IsInTransition(0))
         {
+            anim.SetBool("fallForward", false);
             if (anim_info.normalizedTime >= 1.0f)//动画已经播放完一次了，僵尸死亡
             {
                 Destroy(this.gameObject);
@@ -141,6 +144,7 @@ public class Zombie : MonoBehaviour
         if (slider.value <= 0)
         {
             anim.SetBool("fallForward", true);
+            m_agent.ResetPath();
         }
     }
 }

@@ -4,8 +4,6 @@ using UnityEngine.UI;
 
 public class Handgun : MonoBehaviour {
 
-    private Transform m_muzzlepoint;    // 枪口
-    private Transform m_camTransform;   // 摄像机
     public LayerMask m_layer;           // 碰撞层
     public Transform m_fx;              // 射中目标时的特效
 
@@ -77,9 +75,6 @@ public class Handgun : MonoBehaviour {
 
 		shootAudioSource.clip = SoundClips.shootSound;//将设计的声音设置为音频源
 
-        m_camTransform = Camera.main.transform;// 获取摄像机
-        m_muzzlepoint = m_camTransform.Find("FPSPlayer/Handgun_01_Arms/arms_handgun_01/arms/handgun_01/muzzle").transform;//获取枪口组件
-
     }
 	
 	private void Update () {
@@ -134,15 +129,15 @@ public class Handgun : MonoBehaviour {
             RaycastHit info;    // 保存射线探测结果
             // 射线只能与m_layer指定的层发生碰撞
             bool hit = Physics.Raycast(
-                m_muzzlepoint.position,                                 // 发射点--枪口位置
-                m_camTransform.TransformDirection(Vector3.forward),     // 方向
+                Spawnpoints.bulletSpawnPoint.position,                                 // 发射点--枪口位置
+                gunCamera.transform.forward,     // 方向
                 out info,                                               // 发生碰撞时保存光线投射信息
-                100,                                                    // 射线长度
+                1000,                                                    // 射线长度
                 m_layer);                                               // 碰撞目标层
             if (hit)
             {
                 // 如果射击到了Zombie
-                if (info.transform.tag.CompareTo("Zombie") == 0)
+                if (info.transform.tag == "Zombie")
                 {
                     // 获取游戏体实例
                     Zombie zombie = info.transform.GetComponent<Zombie>();
