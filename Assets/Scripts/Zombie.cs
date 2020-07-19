@@ -19,9 +19,7 @@ public class Zombie : MonoBehaviour
 
     [SerializeField]
     float m_rotspeed = 2;//旋转速度
-    Slider slider;//滑块表示僵尸的血条，血量为5
-    //[SerializeField]
-    //public int m_life = 5;              // 生命值
+    Slider slider;//滑块表示僵尸的血条，血量为10
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +28,6 @@ public class Zombie : MonoBehaviour
         m_player = GameObject.FindGameObjectWithTag("Player").GetComponent<FPSPlayer>();
         m_agent = this.GetComponent<NavMeshAgent>();
         m_agent.speed = move_speed;
-        //m_agent.SetDestination(m_player.transform.position);//设置僵尸寻路的目标点
 
         anim = GetComponent<Animator>();//设置动画组件
         slider = GameObject.Find("Zombie3/Zombie1/Canvas/Slider").GetComponent<Slider>();
@@ -137,7 +134,6 @@ public class Zombie : MonoBehaviour
     //僵尸受到伤害
     public void OnDamage(int demage)
     {
-        Debug.Log(slider.value);
         slider.value -= demage;
 
         //如果没命了,怪物死亡

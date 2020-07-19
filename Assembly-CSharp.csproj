@@ -69,9 +69,9 @@
     <Compile Include="Assets\Scripts\BulletScript.cs" />
     <Compile Include="Assets\Scripts\FPSPlayer.cs" />
     <Compile Include="Assets\Scripts\Handgun.cs" />
+    <Compile Include="Assets\Scripts\Robot.cs" />
     <Compile Include="Assets\Scripts\UI_Manager.cs" />
     <Compile Include="Assets\Scripts\Zombie.cs" />
-    <Compile Include="Assets\Shoot.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

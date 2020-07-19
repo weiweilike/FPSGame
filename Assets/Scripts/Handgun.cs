@@ -136,6 +136,7 @@ public class Handgun : MonoBehaviour {
                 m_layer);                                               // 碰撞目标层
             if (hit)
             {
+                Debug.Log(info.transform.tag);
                 // 如果射击到了Zombie
                 if (info.transform.tag == "Zombie")
                 {
@@ -143,6 +144,11 @@ public class Handgun : MonoBehaviour {
                     Zombie zombie = info.transform.GetComponent<Zombie>();
                     // 更新被射中游戏角色的生命
                     zombie.OnDamage(2);
+                }
+                else if(info.transform.tag == "Robot")
+                {
+                    Robot robot = info.transform.GetComponent<Robot>();
+                    robot.OnDamage(2);
                 }
 
                 // 播放一个射击效果
